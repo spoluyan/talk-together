@@ -1,13 +1,11 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import net.sf.oval.constraint.MaxLength;
 import play.data.validation.Required;
@@ -17,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 @Entity
+@Table(name = "tt_conversations")
 public class Conversation extends Model {
     private static final Gson GSON = new Gson();
 
@@ -29,9 +28,6 @@ public class Conversation extends Model {
     @MaxLength(255)
     public String topic;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    public List<Message> messages;
-
     public Conversation(String creator, int level, String topic) {
         if (topic == null) {
             topic = "No topic";
@@ -43,7 +39,6 @@ public class Conversation extends Model {
         this.level = level;
         this.topic = topic;
         addUser(creator);
-        messages = new ArrayList<>();
     }
 
     public static List<Conversation> findByLevel(int level) {

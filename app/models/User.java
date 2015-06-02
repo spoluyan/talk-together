@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import net.sf.oval.constraint.MaxLength;
 import play.data.validation.Required;
@@ -9,6 +10,7 @@ import play.db.jpa.Model;
 import play.libs.Crypto;
 
 @Entity
+@Table(name = "tt_users")
 public class User extends Model {
     @Required
     @Unique

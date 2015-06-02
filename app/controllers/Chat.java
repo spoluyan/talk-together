@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Conversation;
 import models.Level;
+import models.Message;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -18,9 +19,14 @@ public class Chat extends Controller {
 
     public static void chat(Long id) {
         Conversation chat = Conversation.findById(id);
+        if (chat == null) {
+            notFound();
+        }
         chat.addUser(Security.connected());
         chat.save();
-        render(chat);
+
+        List<Message> msgs = Message.findChatMessages(chat);
+        render(chat, msgs);
     }
 
     public static void create(int level, String topic) {

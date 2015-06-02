@@ -1,3 +1,15 @@
 #{extends 'main.html' /}
 
-Chat
+<h1>${chat.topic}</h1>
+<div class="row">
+	<div class="col-md-10">
+		#{list items:msgs, as:'message'}
+			<p>[${message.posted}] <strong>${message.fromNickName}: </strong>${message.message}</p>
+		#{/list}
+	</div>
+	<div class="col-md-2">
+		#{list items:chat.getConversationUsers(), as:'user'}
+			<p>${user}</p>
+		#{/list}
+	</div>
+</div>

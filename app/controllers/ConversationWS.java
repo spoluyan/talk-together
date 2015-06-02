@@ -18,7 +18,8 @@ public class ConversationWS extends WebSocketController {
             }
 
             for (WebSocketClose closed : WebSocketEvent.SocketClosed.match(event)) {
-                Logger.info("%s disconnected from conversation %d", Security.connected(), closed.hashCode());
+                Logger.info("%s disconnected from conversation", Security.connected());
+                // TODO remove user from conversation
             }
         }
     }
