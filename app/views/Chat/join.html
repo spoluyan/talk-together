@@ -1,3 +1,58 @@
 #{extends 'main.html' /}
 
+<div id="create-modal" class="modal fade create-modal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2>Create you own chat</h2>
+			</div>
+			<div class="modal-body">
+				#{form @Chat.create()}
+					<div class="form-group">
+						<select class="form-control" name="level" id="level">
+							<option value="0">Beginner</option>
+							<option value="1">Intermediate</option>
+							<option value="2">Advanced</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="topic" class="sr-only">Enter topic</label>
+						<input class="form-control" type="text" name="topic" id="topic" placeholder="Chat topic">
+					</div>
+					<button type="submit" class="btn btn-primary">Create</button>
+				#{/form}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <h1>Choose a chat to join</h1>
+
+<div class="row">
+	<div class="col-md-4">
+		<h3>Beginner</h3>
+		<h6>Topics</h6>
+		#{list items:forBeginners, as:'chat'}
+			<p><a href="@{Chat.chat(chat.id)}">${chat.topic}</a> (${chat.getConversationUsers().size()})</p>
+		#{/list}
+	</div>
+  	<div class="col-md-4">
+		<h3>Intermediate</h3>
+		<h6>Topics</h6>
+		#{list items:forIntermediate, as:'chat'}
+			<p><a href="@{Chat.chat(chat.id)}">${chat.topic}</a> (${chat.getConversationUsers().size()})</p>
+		#{/list}
+	</div>
+  	<div class="col-md-4">
+  		<h3>Advanced</h3>
+  		<h6>Topics</h6>
+  		#{list items:forAdvanced, as:'chat'}
+			<p><a href="@{Chat.chat(chat.id)}">${chat.topic}</a> (${chat.getConversationUsers().size()})</p>
+		#{/list}
+  	</div>
+</div>
+<hr>
+<p><button type="button" class="btn btn-primary btn-lg btn-block" onclick="createChat()">Create your own</button></p>

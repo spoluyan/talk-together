@@ -1,5 +1,7 @@
 GET     /                                       Index.index
 GET     /join                                   Chat.join
+GET     /chat/{id}                              Chat.chat
+POST    /chat/create                            Chat.create
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

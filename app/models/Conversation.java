@@ -19,17 +19,21 @@ public class Conversation extends Model {
     private static final Gson GSON = new Gson();
 
     public String users; // JSON
-    public String level;
+    public int level;
     public String topic;
 
     @OneToMany(fetch = FetchType.LAZY)
     public List<Message> messages;
 
-    public Conversation(String creator, String level, String topic) {
+    public Conversation(String creator, int level, String topic) {
         this.level = level;
         this.topic = topic;
         addUser(creator);
         messages = new ArrayList<>();
+    }
+
+    public static List<Conversation> findByLevel(int level) {
+        return find("byLevel", level).fetch();
     }
 
     public Set<String> getConversationUsers() {
@@ -44,5 +48,9 @@ public class Conversation extends Model {
         Set<String> conversationsUsers = getConversationUsers();
         conversationsUsers.add(nickName);
         this.users = GSON.toJson(conversationsUsers);
+    }
+
+    public Level getPrettyLevel() {
+        return Level.fromLevel(level);
     }
 }
