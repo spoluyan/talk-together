@@ -18,6 +18,8 @@ public class Chat extends Controller {
 
     public static void chat(Long id) {
         Conversation chat = Conversation.findById(id);
+        chat.addUser(Security.connected());
+        chat.save();
         render(chat);
     }
 

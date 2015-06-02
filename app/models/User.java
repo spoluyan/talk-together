@@ -6,6 +6,7 @@ import net.sf.oval.constraint.MaxLength;
 import play.data.validation.Required;
 import play.data.validation.Unique;
 import play.db.jpa.Model;
+import play.libs.Crypto;
 
 @Entity
 public class User extends Model {
@@ -18,6 +19,17 @@ public class User extends Model {
     public String password;
 
     public User(String nickName, String password) {
+        if (nickName == null) {
+            nickName = "anonymous" + System.currentTimeMillis();
+        }
+        if (nickName.length() > 255) {
+            nickName = nickName.substring(0, 255);
+        }
+        if (password == null) {
+            password = "";
+        }
+        password = Crypto.passwordHash(password);
+
         this.nickName = nickName;
         this.password = password;
     }
