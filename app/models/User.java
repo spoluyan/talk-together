@@ -15,7 +15,6 @@ public class User extends Model {
     public String nickName;
 
     @Required
-    @MaxLength(255)
     public String password;
 
     public User(String nickName, String password) {

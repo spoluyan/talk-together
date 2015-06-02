@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Let's talk together</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" media="screen" href="@{'/public/css/styles.css'}">
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    </head>
+    <body>
+		<div class="container">
+	        #{form @authenticate(), id:'form-signin'}
+	        	<h2 class="form-signin-heading">Please sign in</h2>
+	        	<p>You will be registered automatically if nickname is free</p>
+	        	#{if flash.error}
+					<p class="text-danger">
+						Incorrect login or password
+					</p>
+				#{/if}
+				<label for="inputLogin" class="sr-only">Login</label>
+		        <input name="username" type="text" id="inputLogin" class="form-control" value="${flash.username}" placeholder="Login" required autofocus>
+		        <label for="inputPassword" class="sr-only">Password</label>
+		        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+		        <div class="checkbox">
+			        <label>
+			        	<input name="remember" type="checkbox" value="true" ${flash.remember ? 'checked="true"' : ''}> Remember me
+			        </label>
+		        </div>
+		        <button class="btn btn-lg btn-primary btn-block" type="submit">Sing in</button>
+	        #{/form}
+		</div>
+        
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </body>
+</html>
