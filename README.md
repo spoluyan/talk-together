@@ -1,3 +1,5 @@
 # Let's talk together
-Under development.
+Online chat.
 Inspired by http://www.ideaswatch.com/startup-idea/lets-talk-together
+
+Vestion 1.0.0
