@@ -1,6 +1,7 @@
 #{extends 'main.html' /}
 
 <h1>${chat.topic}</h1>
+<a href="@{Chat.join()}">Leave chat</a>
 <hr>
 <div class="row">
 	<div class="col-md-10" id="chat">
@@ -10,7 +11,7 @@
 	</div>
 	<div class="col-md-2" id="users-list">
 		#{list items:chat.getConversationUsers(), as:'user'}
-			<p>${user}</p>
+			<p id="${user}">${user}</p>
 		#{/list}
 	</div>
 </div>

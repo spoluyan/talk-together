@@ -5,6 +5,7 @@ import java.util.Set;
 
 import models.Conversation;
 import models.Message;
+import models.WSCommandMessage;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -41,11 +42,21 @@ public class ConversationWS extends WebSocketController {
     }
 
     private static void sendUserDisconnected(Long chatId) {
+        sendOpMessage("disconnected", Security.connected());
         sendMessage(chatId, ">>> has left conversation");
     }
 
     private static void sendUserConnected(Long chatId) {
+        sendOpMessage("connected", Security.connected());
         sendMessage(chatId, ">>> has joined to conversation");
+    }
+
+    private static void sendOpMessage(String op, String data) {
+        SESSIONS.forEach(out -> {
+            if (out.isOpen()) {
+                out.sendJson(new WSCommandMessage(op, data));
+            }
+        });
     }
 
     private static void sendMessage(Long chatId, String message) {
