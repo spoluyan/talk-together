@@ -1,15 +1,31 @@
 #{extends 'main.html' /}
 
 <h1>${chat.topic}</h1>
+<hr>
 <div class="row">
-	<div class="col-md-10">
+	<div class="col-md-10" id="chat">
 		#{list items:msgs, as:'message'}
-			<p>[${message.posted}] <strong>${message.fromNickName}: </strong>${message.message}</p>
+			#{verbatim}${message}#{/verbatim}
 		#{/list}
 	</div>
-	<div class="col-md-2">
+	<div class="col-md-2" id="users-list">
 		#{list items:chat.getConversationUsers(), as:'user'}
 			<p>${user}</p>
 		#{/list}
 	</div>
 </div>
+<hr>
+<div class="row">
+	<div class="col-xs-10">
+		<input id="message" type="text" placeholder="Enter your message here" class="form-control">
+	</div>
+	<div class="col-xs-2">
+		<button type="button" class="btn btn-primary" onclick="sendMessage()">Send</button>
+	</div>
+</div>
+
+<script>
+	var wsEndpoint = #{jsRoute @@ConversationWS.conversation(chat.id) /};
+	var chatId = ${chat.id};
+</script>
+<script src="@{'/public/js/chat.js'}" type="text/javascript" charset="UTF-8"></script>

@@ -51,6 +51,7 @@ body>.container {
 	padding-left: 15px;
 }
 
-textarea {
-	resize: none;
+#chat {
+	max-height: 500px;
+	overflow-y: scroll;
 }

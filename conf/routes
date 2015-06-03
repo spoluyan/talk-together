@@ -2,7 +2,7 @@ GET     /                                       Index.index
 GET     /join                                   Chat.join
 GET     /chat/{id}                              Chat.chat
 POST    /chat/create                            Chat.create
-WS      /conversation                           ConversationWS.conversation
+WS      /conversation/{chatId}                  ConversationWS.conversation
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
